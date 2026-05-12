@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="jumbotron">
+        <h1>Welcome to the Kitchen Management System! 👨‍🍳</h1>
+        <p class="lead">This is the main page of our service. Here we manage all processes.</p>
+    </div>
+
+    <h2>Our Kitchen Statistics:</h2>
+    <ul class="list-group w-50">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            Number of dishes in the menu
+            <span class="badge badge-primary badge-pill">{{ num_dishes }}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            Number of cooks
+            <span class="badge badge-primary badge-pill">{{ num_cooks }}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            Dish categories
+            <span class="badge badge-primary badge-pill">{{ num_dish_types }}</span>
+        </li>
+    </ul>
+{% endblock %}
