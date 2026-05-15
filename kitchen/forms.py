@@ -47,7 +47,7 @@ class CookExperienceUpdateForm(forms.ModelForm):
     def clean_years_of_experience(self):
         years = self.cleaned_data["years_of_experience"]
         if years < 0:
-            raise ValidationError("Досвід роботи не може бути від'ємним.")
+            raise ValidationError("Work experience cannot be negative.")
         return years
 
 

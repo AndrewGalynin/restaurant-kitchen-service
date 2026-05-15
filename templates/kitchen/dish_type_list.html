@@ -6,6 +6,11 @@
     <a href="{% url 'kitchen:dish-type-create' %}" class="btn btn-primary">+ Add Dish Type</a>
   </div>
 
+  <form action="" method="get" style="display: flex; gap: 10px; margin-bottom: 20px; max-width: 400px;">
+    {{ search_form }}
+    <button class="btn btn-primary" type="submit">Search</button>
+  </form>
+
   <div class="card" style="padding: 0;">
     <table class="modern-table">
       <thead>
