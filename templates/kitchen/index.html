@@ -1,24 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="jumbotron">
-        <h1>Welcome to the Kitchen Management System! 👨‍🍳</h1>
-        <p class="lead">This is the main page of our service. Here we manage all processes.</p>
-    </div>
+  <h1 style="color: var(--dark-blue); margin-bottom: 10px;">Welcome back!</h1>
+  <p style="color: var(--text-light); margin-bottom: 30px;">Here is the current overview of our kitchen operations.</p>
 
-    <h2>Our Kitchen Statistics:</h2>
-    <ul class="list-group w-50">
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            Number of dishes in the menu
-            <span class="badge badge-primary badge-pill">{{ num_dishes }}</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            Number of cooks
-            <span class="badge badge-primary badge-pill">{{ num_cooks }}</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            Dish categories
-            <span class="badge badge-primary badge-pill">{{ num_dish_types }}</span>
-        </li>
-    </ul>
+  <div class="card">
+    <h2 class="card-title">Kitchen Statistics</h2>
+    <div class="stats-grid">
+      <div class="stat-box">
+        <h3>Total Dishes</h3>
+        <div class="number">{{ num_dishes }}</div>
+      </div>
+      <div class="stat-box">
+        <h3>Our Cooks</h3>
+        <div class="number">{{ num_cooks }}</div>
+      </div>
+      <div class="stat-box">
+        <h3>Dish Categories</h3>
+        <div class="number">{{ num_dish_types }}</div>
+      </div>
+    </div>
+  </div>
 {% endblock %}
