@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <h1 style="color: var(--dark-blue);">Dish Types</h1>
+    <a href="{% url 'kitchen:dish-type-create' %}" class="btn btn-primary">+ Add Dish Type</a>
+  </div>
+
+  <div class="card" style="padding: 0;">
+    <table class="modern-table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th style="text-align: right;">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for dish_type in dish_type_list %}
+        <tr>
+          <td>#{{ dish_type.id }}</td>
+          <td style="font-weight: 500;">{{ dish_type.name }}</td>
+          <td style="text-align: right;">
+            <a href="{% url 'kitchen:dish-type-update' pk=dish_type.id %}" class="btn btn-outline"
+               style="padding: 5px 10px; font-size: 0.9rem;">Edit</a>
+            <a href="{% url 'kitchen:dish-type-delete' pk=dish_type.id %}" class="btn btn-danger"
+               style="padding: 5px 10px; font-size: 0.9rem;">Delete</a>
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="3" style="text-align: center; padding: 30px; color: var(--text-light);">No dish types found.</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
