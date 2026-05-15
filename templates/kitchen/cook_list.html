@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <h1 style="color: var(--dark-blue);">Cooks</h1>
+    <a href="{% url 'kitchen:cook-create' %}" class="btn btn-primary">+ Register Cook</a>
+  </div>
+
+  <form action="" method="get" style="display: flex; gap: 10px; margin-bottom: 20px; max-width: 400px;">
+    {{ search_form }}
+    <button class="btn btn-primary" type="submit">Search</button>
+  </form>
+
+  <div class="card" style="padding: 0;">
+    <table class="modern-table">
+      <thead>
+      <tr>
+        <th>Username</th>
+        <th>Full Name</th>
+        <th>Experience</th>
+        <th style="text-align: right;">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for cook in cook_list %}
+        <tr>
+          <td style="font-weight: 500;">
+            <a href="{{ cook.get_absolute_url }}"
+               style="color: var(--primary-blue); text-decoration: none;">{{ cook.username }}</a>
+          </td>
+          <td>{{ cook.first_name }} {{ cook.last_name }}</td>
+          <td>{{ cook.years_of_experience }} years</td>
+          <td style="text-align: right;">
+            <a href="{% url 'kitchen:cook-update' pk=cook.id %}" class="btn btn-outline"
+               style="padding: 5px 10px; font-size: 0.9rem;">Update Exp</a>
+            <a href="{% url 'kitchen:cook-delete' pk=cook.id %}" class="btn btn-danger"
+               style="padding: 5px 10px; font-size: 0.9rem;">Delete</a>
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="4" style="text-align: center; padding: 30px; color: var(--text-light);">No cooks found.</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

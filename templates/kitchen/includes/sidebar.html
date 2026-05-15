@@ -8,16 +8,18 @@
       <a class="nav-link" href="{% url 'kitchen:index' %}">Home Page</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Dishes</a>
+      <a class="nav-link" href="{% url 'kitchen:dish-list' %}">Dishes</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="{% url 'kitchen:dish-type-list' %}">Dish Types</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Cooks</a>
+      <a class="nav-link" href="{% url 'kitchen:cook-list' %}">Cooks</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'kitchen:ingredient-list' %}">Ingredients</a>
     </li>
   </ul>
-
   <div class="nav-item" style="margin-top: auto; padding-top: 20px;">
     <form action="{% url 'logout' %}" method="post">
       {% csrf_token %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <h1 style="color: var(--dark-blue);">Dishes</h1>
+    <a href="{% url 'kitchen:dish-create' %}" class="btn btn-primary">+ Add Dish</a>
+  </div>
+
+  <form action="" method="get" style="display: flex; gap: 10px; margin-bottom: 20px; max-width: 400px;">
+    {{ search_form }}
+    <button class="btn btn-primary" type="submit">Search</button>
+  </form>
+
+  <div class="card" style="padding: 0;">
+    <table class="modern-table">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Price</th>
+        <th style="text-align: right;">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for dish in dish_list %}
+        <tr>
+          <td style="font-weight: 500;">
+            <a href="{% url 'kitchen:dish-detail' pk=dish.id %}"
+               style="color: var(--primary-blue); text-decoration: none;">{{ dish.name }}</a>
+          </td>
+          <td>{{ dish.dish_type.name }}</td>
+          <td>{{ dish.price }} ₴</td>
+          <td style="text-align: right;">
+            <a href="{% url 'kitchen:dish-update' pk=dish.id %}" class="btn btn-outline"
+               style="padding: 5px 10px; font-size: 0.9rem;">Edit</a>
+            <a href="{% url 'kitchen:dish-delete' pk=dish.id %}" class="btn btn-danger"
+               style="padding: 5px 10px; font-size: 0.9rem;">Delete</a>
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="4" style="text-align: center; padding: 30px; color: var(--text-light);">No dishes found.</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
