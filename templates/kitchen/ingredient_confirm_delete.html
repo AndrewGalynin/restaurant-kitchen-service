@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="card" style="max-width: 600px; border-top: 4px solid var(--danger);">
+    <h2 class="card-title" style="color: var(--danger);">Confirm Deletion</h2>
+
+    <p style="margin-bottom: 20px; font-size: 1.1rem;">
+      Are you sure you want to delete the ingredient: <strong
+        style="color: var(--dark-blue);">{{ object.name }}</strong>?
+    </p>
+
+    <div
+        style="background-color: #fef2f2; border: 1px solid #fecaca; color: #991b1b; padding: 15px; border-radius: 6px; margin-bottom: 20px; font-size: 0.9rem;">
+      <strong>Warning:</strong> Deleting this ingredient might affect dishes that currently use it.
+    </div>
+
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">Yes, delete it</button>
+      <a href="{% url 'kitchen:ingredient-list' %}" class="btn btn-outline" style="margin-left: 10px;">Cancel</a>
+    </form>
+  </div>
+{% endblock %}

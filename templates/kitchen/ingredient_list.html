@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <h1 style="color: var(--dark-blue);">Ingredients</h1>
+    <a href="{% url 'kitchen:ingredient-create' %}" class="btn btn-primary">+ Add Ingredient</a>
+  </div>
+
+  <form action="" method="get" style="display: flex; gap: 10px; margin-bottom: 20px; max-width: 400px;">
+    {{ search_form }}
+    <button class="btn btn-primary" type="submit">Search</button>
+  </form>
+
+  <div class="card" style="padding: 0;">
+    <table class="modern-table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Ingredient Name</th>
+        <th style="text-align: right;">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for ingredient in ingredient_list %}
+        <tr>
+          <td style="color: var(--text-light);">#{{ ingredient.id }}</td>
+          <td style="font-weight: 500; font-size: 1.1rem;">{{ ingredient.name }}</td>
+          <td style="text-align: right;">
+            <a href="{% url 'kitchen:ingredient-update' pk=ingredient.id %}" class="btn btn-outline"
+               style="padding: 5px 10px; font-size: 0.9rem;">Edit</a>
+            <a href="{% url 'kitchen:ingredient-delete' pk=ingredient.id %}" class="btn btn-danger"
+               style="padding: 5px 10px; font-size: 0.9rem;">Delete</a>
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="3" style="text-align: center; padding: 30px; color: var(--text-light);">No ingredients found in
+            the database.
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

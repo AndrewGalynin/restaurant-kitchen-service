@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+    <div>
+      <h1 style="color: var(--dark-blue); margin-bottom: 5px;">{{ cook.username }}</h1>
+      <p style="color: var(--text-light);">{{ cook.first_name }} {{ cook.last_name }} | {{ cook.years_of_experience }}
+        years of experience</p>
+    </div>
+    <div style="display: flex; gap: 10px;">
+      <a href="{% url 'kitchen:cook-update' pk=cook.id %}" class="btn btn-outline">Update Experience</a>
+      <a href="{% url 'kitchen:cook-delete' pk=cook.id %}" class="btn btn-danger">Delete</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-bottom: 15px;">Assigned Dishes:</h3>
+    <ul style="margin-left: 20px; color: var(--text-light);">
+      {% for dish in cook.dishes.all %}
+        <li style="margin-bottom: 10px;">
+          <a href="{{ dish.get_absolute_url }}"
+             style="color: var(--primary-blue); text-decoration: none; font-weight: 500;">{{ dish.name }}</a>
+          <span style="font-size: 0.9rem; color: #94a3b8;">({{ dish.dish_type.name }})</span>
+        </li>
+      {% empty %}
+        <li>This cook has no assigned dishes yet.</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}
