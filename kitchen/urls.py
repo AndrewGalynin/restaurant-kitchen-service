@@ -19,15 +19,15 @@ from kitchen.views import (
     IngredientCreateView,
     IngredientUpdateView,
     IngredientDeleteView,
-    index,
-    signup,
+    IndexView,
+    CookSignupView,
     toggle_assign_to_dish,
 )
 
 
 urlpatterns = [
-    path("", index, name="index"),
-    path("signup/", signup, name="signup"),
+    path("", IndexView.as_view(), name="index"),
+    path("signup/", CookSignupView.as_view(), name="signup"),
     path("dish-types/", DishTypeListView.as_view(), name="dish-type-list"),
     path("dish-types/create/", DishTypeCreateView.as_view(), name="dish-type-create"),
     path(
@@ -50,7 +50,6 @@ urlpatterns = [
         toggle_assign_to_dish,
         name="toggle-assign-to-dish",
     ),
-    # Cooks CRUD
     path("cooks/", CookListView.as_view(), name="cook-list"),
     path("cooks/<int:pk>/", CookDetailView.as_view(), name="cook-detail"),
     path("cooks/create/", CookCreateView.as_view(), name="cook-create"),

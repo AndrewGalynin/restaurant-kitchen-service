@@ -1,8 +1,7 @@
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -19,31 +18,26 @@ from kitchen.forms import (
 )
 
 
-@login_required
-def index(request: HttpRequest) -> HttpResponse:
-    num_dishes = Dish.objects.count()
-    num_cooks = Cook.objects.count()
-    num_dish_types = DishType.objects.count()
+class IndexView(LoginRequiredMixin, generic.TemplateView):
+    template_name = "kitchen/index.html"
 
-    context = {
-        "num_dishes": num_dishes,
-        "num_cooks": num_cooks,
-        "num_dish_types": num_dish_types,
-    }
-
-    return render(request, "kitchen/index.html", context=context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["num_dishes"] = Dish.objects.count()
+        context["num_cooks"] = Cook.objects.count()
+        context["num_dish_types"] = DishType.objects.count()
+        return context
 
 
-def signup(request):
-    if request.method == "POST":
-        form = CookCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect("kitchen:index")
-    else:
-        form = CookCreationForm()
-    return render(request, "registration/signup.html", {"form": form})
+class CookSignupView(generic.CreateView):
+    template_name = "registration/signup.html"
+    form_class = CookCreationForm
+    success_url = reverse_lazy("kitchen:index")
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        login(self.request, self.object)
+        return response
 
 
 class DishTypeListView(LoginRequiredMixin, generic.ListView):
