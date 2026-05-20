@@ -14,3 +14,11 @@ A comprehensive Django web application designed to manage a restaurant's kitchen
 * Django 6.0.5
 * SQLite (Default database)
 * HTML/CSS (Custom styling)
+
+## Demo
+
+Live project: [Restaurant Kitchen Service](https://restaurant-kitchen-service-kt5t.onrender.com)
+
+**Test User Credentials:**
+* **Username:** `user`
+* **Password:** `user12345`
